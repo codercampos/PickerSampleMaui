@@ -2,10 +2,20 @@
 
 namespace PickerSample
 {
-    public class MainViewModel
+    public class MainViewModel : BaseViewModel
     {
         public ObservableCollection<Monkey> Items { get; set; } = new();
-        public Monkey SelectedItem { get; set; }
+
+        private Monkey _selectedItem;
+        public Monkey SelectedItem 
+        {
+            get => _selectedItem;
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged(nameof(SelectedItem));
+            }
+        }
 
         public MainViewModel()
         {
@@ -18,6 +28,8 @@ namespace PickerSample
             Items.Add(new Monkey("Cappucin Monkey"));
             Items.Add(new Monkey("Blue Monkey"));
             Items.Add(new Monkey("Squirrel Monkey"));
+
+            SelectedItem = Items.FirstOrDefault();
         }
     }
 }
